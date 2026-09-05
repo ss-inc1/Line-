@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="AIで絵が描けなくてもLINEスタンプを作って売るガイド。スマホだけ、写真1枚、8個から申請できます。">
+<title>スマホ1台で作るLINEスタンプ｜AIで絵が描けなくても8個から申請</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mint:#eaf6ef;
+    --mint-deep:#cdece0;
+    --ink:#26333a;
+    --ink-soft:#5b6b70;
+    --coral:#ff7b68;
+    --coral-deep:#e8583f;
+    --yellow:#ffd873;
+    --paper:#fffdf9;
+    --line:#c9e3d6;
+    --radius:22px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--mint);
+    color:var(--ink);
+    font-family:"Noto Sans JP",sans-serif;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.disp{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;
+    line-height:1.45;
+    letter-spacing:.01em;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 22px;}
+  section{padding:64px 0;}
+  img{max-width:100%;display:block;border-radius:16px;}
+
+  /* Hero */
+  .hero{
+    position:relative;
+    padding:56px 0 48px;
+    background:
+      radial-gradient(circle at 85% 8%, var(--yellow) 0, transparent 42%),
+      radial-gradient(circle at 8% 85%, var(--coral) 0, transparent 38%),
+      var(--mint);
+    overflow:hidden;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .kicker{
+    display:inline-block;
+    background:var(--paper);
+    border:2px solid var(--ink);
+    border-radius:999px;
+    padding:6px 18px;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:22px;
+    box-shadow:3px 3px 0 var(--ink);
+  }
+  .hero h1{font-size:clamp(30px,7vw,42px);margin:0 0 20px;}
+  .hero h1 em{
+    font-style:normal;
+    color:var(--coral-deep);
+    text-decoration: underline wavy var(--yellow) 4px;
+    text-underline-offset:6px;
+  }
+  .hero p.lead{font-size:17px;color:var(--ink-soft);max-width:34em;}
+  .hero-photo{
+    margin-top:34px;
+    background:linear-gradient(160deg,#dff3e9,#c7e8da);
+    border-radius:28px;
+    padding:28px 28px 16px;
+    text-align:center;
+  }
+  .hero-photo img{
+    width:220px;
+    margin:0 auto;
+    filter:drop-shadow(0 14px 18px rgba(38,51,58,.18));
+  }
+  .hero-photo .cap{font-size:13px;color:var(--ink-soft);margin-top:12px;}
+
+  /* pain points */
+  .pain-list{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:12px;}
+  .pain-list li{
+    background:var(--paper);
+    border:2px solid var(--ink);
+    border-radius:16px;
+    padding:14px 18px;
+    font-weight:500;
+    box-shadow:4px 4px 0 var(--mint-deep);
+  }
+  .reassure{
+    margin-top:26px;
+    font-size:19px;
+    font-weight:700;
+    background:var(--ink);
+    color:var(--paper);
+    display:inline-block;
+    padding:12px 22px;
+    border-radius:14px;
+  }
+
+  /* why now */
+  .why-now{background:var(--paper);}
+  .price-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;}
+  .price-card{
+    border:2px solid var(--ink);
+    border-radius:18px;
+    padding:18px 14px;
+    text-align:center;
+    background:var(--mint);
+  }
+  .price-card .old{font-size:14px;color:var(--ink-soft);text-decoration:line-through;}
+  .price-card .arrow{margin:4px 0;font-size:13px;color:var(--ink-soft);}
+  .price-card .new{font-size:26px;font-weight:900;font-family:"Zen Maru Gothic",sans-serif;color:var(--coral-deep);}
+  .price-card .label{font-size:13px;margin-top:6px;color:var(--ink-soft);}
+  .source{font-size:12.5px;color:var(--ink-soft);margin-top:14px;}
+
+  /* tools */
+  .tools-diagram{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    margin:30px 0 8px;flex-wrap:wrap;font-family:"Zen Maru Gothic",sans-serif;font-weight:700;
+  }
+  .tool-pill{background:var(--paper);border:2px solid var(--ink);border-radius:999px;padding:12px 20px;box-shadow:3px 3px 0 var(--ink);}
+  .tools-diagram .sep{font-size:22px;color:var(--coral-deep);}
+
+  /* steps */
+  .step{
+    background:var(--paper);
+    border-radius:var(--radius);
+    padding:26px 22px 22px;
+    margin-top:26px;
+    border:2px solid var(--line);
+  }
+  .step-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:40px;height:40px;border-radius:50%;
+    background:var(--coral);color:#fff;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:18px;
+    margin-bottom:12px;
+  }
+  .step h3{font-size:20px;margin:0 0 6px;}
+  .step .goal{color:var(--ink-soft);font-size:14.5px;margin-bottom:14px;}
+  .step .goal b{color:var(--ink);}
+  .step img{margin:14px 0 6px;border:1px solid #dfe9e3;}
+  .step .cap{font-size:13px;color:var(--ink-soft);text-align:center;margin-bottom:6px;}
+  .tip{
+    background:#fff6e2;border-left:4px solid var(--yellow);
+    padding:12px 16px;border-radius:0 12px 12px 0;font-size:14.5px;margin-top:14px;
+  }
+  .warn{
+    background:#ffece8;border-left:4px solid var(--coral-deep);
+    padding:12px 16px;border-radius:0 12px 12px 0;font-size:14.5px;margin-top:14px;
+  }
+  .checklist{margin-top:14px;font-size:14.5px;color:var(--ink-soft);}
+
+  /* prompt box */
+  .prompt-box{
+    position:relative;
+    background:#1f2b30;
+    color:#eaf3ee;
+    border-radius:14px;
+    padding:20px 18px 18px;
+    margin-top:14px;
+    font-size:13.5px;
+    line-height:1.8;
+    white-space:pre-wrap;
+    font-family:"SFMono-Regular",Consolas,monospace;
+    max-height:340px;
+    overflow-y:auto;
+  }
+  .prompt-label{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:2px;
+  }
+  .prompt-label span{font-family:"Noto Sans JP",sans-serif;font-weight:700;font-size:13px;color:var(--ink-soft);}
+  .copy-btn{
+    font-family:"Noto Sans JP",sans-serif;
+    font-weight:700;font-size:13px;
+    background:var(--coral);color:#fff;border:none;border-radius:999px;
+    padding:7px 16px;cursor:pointer;
+  }
+  .copy-btn.copied{background:#3fa373;}
+
+  /* idea cards */
+  .idea-card{
+    background:var(--paper);border:2px solid var(--ink);border-radius:16px;
+    padding:16px 18px;margin-top:14px;box-shadow:4px 4px 0 var(--mint-deep);
+  }
+  .idea-card h4{margin:0 0 6px;font-family:"Zen Maru Gothic",sans-serif;font-size:16px;}
+
+  /* faq */
+  details{
+    background:var(--paper);border-radius:14px;padding:14px 18px;margin-top:10px;
+    border:1px solid var(--line);
+  }
+  summary{font-weight:700;cursor:pointer;list-style:none;}
+  summary::-webkit-details-marker{display:none;}
+  summary:before{content:"Q. ";color:var(--coral-deep);}
+  details p{margin:10px 0 2px;color:var(--ink-soft);}
+
+  /* turn section */
+  .turn{background:var(--ink);color:#f2ede4;}
+  .turn h2{color:#fff;}
+  .turn img{border-radius:20px;margin-bottom:26px;}
+  .turn .fail-list{list-style:none;padding:0;margin:20px 0;}
+  .turn .fail-list li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.15);color:#d9d3c6;}
+  .turn strong{color:var(--yellow);}
+
+  /* final cta */
+  .cta-final{background:linear-gradient(160deg,var(--mint-deep),var(--mint));text-align:center;}
+  .cta-btn{
+    display:inline-block;margin-top:20px;
+    background:var(--coral-deep);color:#fff;
+    font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:19px;
+    padding:18px 40px;border-radius:999px;text-decoration:none;
+    box-shadow:0 10px 0 #a83f2c;
+  }
+  .cta-btn:active{transform:translateY(6px);box-shadow:0 4px 0 #a83f2c;}
+  .cta-note{font-size:13px;color:var(--ink-soft);margin-top:16px;}
+
+  footer{text-align:center;font-size:13px;color:var(--ink-soft);padding:30px 0 50px;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">スマホだけ・写真1枚・8個から申請</span>
+    <h1>スマホの中の写真1枚が、<br><em>売り物のLINEスタンプ</em>になる。</h1>
+    <p class="lead">絵が描けなくても、パソコンがなくても大丈夫です。描くのはAI、切り抜きと申請はLINE公式の無料アプリ。最初から最後まで、スマホの中だけで終わります。</p>
+    <div class="hero-photo">
+      <img src="assets/step-cropped-single.jpg" alt="AIで作った白いポメラニアンのLINEスタンプ素材">
+      <div class="cap">1枚の写真から、実際に作ったスタンプ素材</div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>やってみたい気持ちはあっても、こう思いませんか</h2>
+    <ul class="pain-list">
+      <li>絵が描けないのに、売り物になるスタンプが作れるわけがない</li>
+      <li>パソコンを持っていないから、自分には無理なんじゃないか</li>
+      <li>売るとなると、手続きが大変そう</li>
+    </ul>
+    <div class="reassure">どれも、要りません。</div>
+  </div>
+</section>
+
+<section class="why-now">
+  <div class="wrap">
+    <h2>なぜ、いま始めるといいのか</h2>
+    <p>2026年7月1日、LINEクリエイターズスタンプ（静止画）の価格が改定されました。</p>
+    <div class="price-cards">
+      <div class="price-card">
+        <div class="old">120円〜</div>
+        <div class="arrow">↓</div>
+        <div class="new">190円〜</div>
+        <div class="label">販売価格</div>
+      </div>
+      <div class="price-card">
+        <div class="old">約42円</div>
+        <div class="arrow">↓</div>
+        <div class="new">約66円</div>
+        <div class="label">分配額の目安</div>
+      </div>
+    </div>
+    <p class="source">出典：LINEヤフー「LINEスタンプ・絵文字の一部商品価格改定に関するお知らせ」（2026年6月1日発表）。分配額は目安であり、購入経路により実際の金額は変わります。</p>
+    <p>値上げは買う側には嬉しくない話ですが、作る側からすれば、同じ1つが売れたときの金額が上がったということです。仕組みは変わっていないのに、条件だけ良くなっているタイミングです。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>使うのは、たった2つ</h2>
+    <div class="tools-diagram">
+      <div class="tool-pill">ChatGPT / Claude</div>
+      <div class="sep">→</div>
+      <div class="tool-pill">LINEスタンプメーカー</div>
+    </div>
+    <p>最初にAIで「10個入りのイラストシート」を1枚だけ作ります。あとはLINE公式の無料アプリで、1個ずつ切り抜いて申請するだけです。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 style="margin-bottom:4px;">手順を、全部見せます</h2>
+    <p style="color:var(--ink-soft);">実際に「ポメポメスタンプ」を作ったときの画面を、そのまま使っています。</p>
+
+    <div class="step">
+      <span class="step-badge">1</span>
+      <h3>元になる写真を1枚用意する</h3>
+      <p class="goal"><b>目的：</b>AIにキャラクターの元イメージを掴んでもらうためです。</p>
+      <p>顔がはっきり写っている、正面に近い角度の、他人が写り込んでいない写真を選びます。</p>
+      <div class="tip">写真がなくても大丈夫です。AIに「オリジナルキャラクターを1体作って」と伝えれば、ゼロから作ってもらえます。</div>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">2</span>
+      <h3>AIに10個セットのシートを作ってもらう</h3>
+      <p class="goal"><b>目的：</b>申請に必要な「8個以上」を、1枚の画像から効率よく用意するためです。</p>
+      <p>以下のプロンプトを、写真と一緒にChatGPTまたはClaudeに送ってください。</p>
+      <div class="prompt-box" id="prompt1">
+<div class="prompt-label"><span>コピペ用プロンプト</span><button class="copy-btn" onclick="copyPrompt('prompt1raw', this)">コピー</button></div>
+<span id="prompt1raw">LINEスタンプ用のイラストを作ってください。
+
+【出力の形】
+・1枚の画像の中に、同じキャラクターのイラストを10個並べる
+・レイアウトは2列×5行（または5列×2行）で、等間隔に整列させる
+・1個ずつが独立した正方形の枠に収まるようにし、隣同士が重ならないようにする
+・背景は完全に透明（透過PNG）にする。チェック柄などの透過っぽい模様は描かない
+
+【キャラクターについて】
+・添付した写真をもとに、同じ動物・同じ人物だと分かるようにデフォルメする
+・毛色、輪郭、雰囲気はできるだけ元の写真に寄せる
+・LINEスタンプらしく、太めの線、シンプルな形、はっきりした表情にする
+・写真がない場合は、親しみやすいオリジナルキャラクターを1体作ってよい
+
+【10個の内容】
+おはよう／ありがとう／OK／了解／おつかれさま／ごめん／お願い／笑／びっくり／ごめん寝る
+
+【注意】
+・10個すべて同じキャラクター、同じ色、同じ体型で統一する
+・表情・ポーズ・向きは10個それぞれ変える
+・文字を入れる場合は短く、日本語で、大きく読みやすくする
+・実在のキャラクターや企業ロゴ、有名人の顔は使わない
+
+最終的に、10個をまとめた画像を1枚だけ出力してください。説明文は不要です。</span>
+      </div>
+      <p style="margin-top:14px;"><b>10個作るのは保険です。</b>申請に必要なのは8個。2つ多めに出しておけば、気に入らないものが混ざっても選び直せます。</p>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">3</span>
+      <h3>LINEスタンプメーカーを開く</h3>
+      <p class="goal"><b>目的：</b>切り抜きから申請まで、ここから先を全部この無料アプリで進めるためです。</p>
+      <p>「1つずつつくる」の緑の「スタンプ」を選びます。紫の「アニメーションスタンプ」ではないので注意してください。</p>
+      <img src="assets/step-maker-top.jpg" alt="LINEスタンプメーカーのトップ画面">
+      <div class="cap">左の緑「スタンプ」から入ります</div>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">4</span>
+      <h3>自動切り抜きが失敗したときの対処</h3>
+      <p class="goal"><b>目的：</b>よくあるつまずきポイントを、先に知っておくためです。</p>
+      <p>シートを読み込むと、レイアウトによっては下のように「検知できませんでした」と出ることがあります。</p>
+      <img src="assets/step-detect-fail.jpg" alt="自動切り抜きが検出できなかった画面">
+      <div class="cap">これは失敗ではなく、よくあることです</div>
+      <p>画面下の「自動切り抜き」「なぞる」「消しゴム」から、次のSTEPで紹介する四角形での手動切り抜きに進めば問題ありません。</p>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">5</span>
+      <h3>四角形で1個ずつ切り抜く</h3>
+      <p class="goal"><b>目的：</b>10個のシートから、1個ずつ独立したスタンプ画像を作るためです。</p>
+      <img src="assets/step-editor.jpg" alt="編集画面。左下に切り抜きツールがある">
+      <div class="cap">左下のツールバーに「切り抜き」があります</div>
+      <img src="assets/step-crop-modal.jpg" alt="切り抜きの形を選ぶ画面。四角形を選択">
+      <div class="cap">形の一覧から四角形を選びます</div>
+      <img src="assets/step-cropped-single.jpg" alt="1個だけ四角く切り抜いた状態">
+      <div class="cap">キャラクターの外側に少し余白を残して「次へ」</div>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">6</span>
+      <h3>見え方を確認して保存する</h3>
+      <p class="goal"><b>目的：</b>実際のトーク画面での見え方を確認するためです。</p>
+      <img src="assets/step-preview-chat.jpg" alt="トーク画面でのプレビュー">
+      <div class="cap">違和感がなければ保存します</div>
+      <div class="checklist">✅ ここまでを、使いたい8個ぶん繰り返します</div>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">7</span>
+      <h3>8個そろえて、タイトルをつける</h3>
+      <p class="goal"><b>目的：</b>申請できる状態まで完成させるためです。</p>
+      <img src="assets/step-list1.jpg" alt="1個保存した直後の一覧画面">
+      <div class="cap">ここに8個ぶん並べていきます</div>
+      <img src="assets/step-list8.jpg" alt="8個そろいタイトルを入力した画面">
+      <div class="cap">タイトルを入れると「販売申請」が表示されます</div>
+      <div class="tip">説明文は、初期表示されている文章のままでも申請できます。</div>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">8</span>
+      <h3>メイン画像を選ぶ</h3>
+      <p class="goal"><b>目的：</b>LINE STOREの一覧に表示される「顔」を決めるためです。</p>
+      <img src="assets/step-main-select.jpg" alt="メイン画像を選択する画面">
+      <div class="cap">8個の中から、一番目を引く1個を選びます</div>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">9</span>
+      <h3>写真・動画の使用について同意する</h3>
+      <p class="goal"><b>目的：</b>他人の権利を侵害していないことを確認するためです。</p>
+      <img src="assets/step-agree.jpg" alt="写真・動画の使用に関する同意画面">
+      <div class="cap">内容をよく読んで同意します</div>
+      <div class="warn">実在するキャラクター、企業のロゴ、有名人の顔、特定の作家の画風はNGです。友人やお子さんが写っている写真を使う場合は、必ず本人（未成年なら保護者）の許可を取ってください。</div>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">10</span>
+      <h3>販売情報を設定して申請する</h3>
+      <p class="goal"><b>目的：</b>価格やAIの使用有無など、販売の条件を確定させるためです。</p>
+      <img src="assets/step-sales-info.jpg" alt="販売情報の設定画面">
+      <div class="cap">価格は¥190〜、AIの使用も正直に選びます</div>
+      <p>最後の確認画面まで進み、「リクエスト」で申請完了です。</p>
+      <div class="tip"><b>販売エリアは増やしたほうがいい。</b>台湾はLINE普及率94.5%、タイは81.8%と日本より高水準です。チェックを増やすだけで、費用ゼロでスタンプが目に入る人数が広がります（出典：LINEヤフー「海外における事業展開」月間アクティブユーザー数）。</div>
+      <div class="checklist">✅ 審査は約2日（早ければ数時間）。差し戻されても直して再申請できます</div>
+    </div>
+  </div>
+</section>
+
+<section class="why-now">
+  <div class="wrap">
+    <h2>どんなジャンルが売れやすいか</h2>
+    <p>犬・猫のようなペット系スタンプは、すでにかなり数が出そろっています。今から同じ土俵で戦うと、埋もれやすいのが正直なところです。狙い目は、まだ「ちゃんと作られていない」ジャンルです。</p>
+    <div class="prompt-box" id="prompt2">
+<div class="prompt-label"><span>ジャンル探しプロンプト</span><button class="copy-btn" onclick="copyPrompt('prompt2raw', this)">コピー</button></div>
+<span id="prompt2raw">LINE STOREで人気のスタンプジャンルを教えてください。
+
+そのうえで、以下の条件に当てはまる、
+まだあまり選択肢が多くなさそうなジャンルを5つ提案してください。
+
+【条件】
+・特定の職業・趣味・立場の人に強く刺さる内容（万人向けではなくてよい）
+・日常的にLINEで使う場面が具体的にイメージできる
+・可愛い動物キャラクター以外の切り口である</span>
+    </div>
+
+    <div class="idea-card">
+      <h4>ネタ系・あるある系</h4>
+      <p style="margin:0;color:var(--ink-soft);">医療従事者あるある、夜勤明けあるあるなど、「分かる人にはめちゃくちゃ分かる」共感の濃さで刺す方向性。</p>
+    </div>
+    <div class="idea-card">
+      <h4>方言・特定の言い回し特化</h4>
+      <p style="margin:0;color:var(--ink-soft);">標準語ではなく、特定の方言やコミュニティでしか通じない言い回しに絞る方向性。対象が絞られる分、刺さった人の満足度が高い。</p>
+    </div>
+    <div class="idea-card">
+      <h4>感情特化型</h4>
+      <p style="margin:0;color:var(--ink-soft);">「激重感情」「静かにキレてる」など、感情の解像度を上げた表現に特化する方向性。</p>
+    </div>
+    <div class="idea-card">
+      <h4>職業・シーン特化の定型文</h4>
+      <p style="margin:0;color:var(--ink-soft);">エンジニアや営業職などが毎日使う定型文をスタンプにする方向性。実用性で選ばれる。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>気になるところ</h2>
+    <details>
+      <summary>写真がなくても作れますか？</summary>
+      <p>作れます。STEP2のプロンプトには「写真がない場合」の指示も入っているので、AIにオリジナルキャラクターを1体作ってもらうところから始められます。</p>
+    </details>
+    <details>
+      <summary>パソコンは必要ですか？</summary>
+      <p>必要ありません。AIチャットもLINEスタンプメーカーも、スマホアプリで完結します。</p>
+    </details>
+    <details>
+      <summary>無料プランのAIでも大丈夫ですか？</summary>
+      <p>画像生成には回数の上限があることが多く、途中で止まる場合があります。上限が回復するのを待つか、有料プランの利用も検討してください。</p>
+    </details>
+    <details>
+      <summary>審査に落ちたらどうなりますか？</summary>
+      <p>どこが基準に合わなかったか案内が来るので、直して出し直せます。1回勝負ではありません。</p>
+    </details>
+    <details>
+      <summary>同じキャラクターで続きを作れますか？</summary>
+      <p>作れます。1枚目のシート画像をAIに添付して「このキャラクターのまま、別の10個を作って」と伝えるだけです。シリーズ化すると、1つ買った人がもう1つも買ってくれることがあります。</p>
+    </details>
+  </div>
+</section>
+
+<section class="turn">
+  <div class="wrap">
+    <img src="assets/betsu-hero.jpg" alt="作れることと、稼ぎ続けることは別の話です。">
+    <h2>作れることと、稼ぎ続けることは別の話です</h2>
+    <p>LINEスタンプを作る手順は、ここまでで全部渡しました。ただ、正直に言います。スタンプが作れることと、AIを使って安定して収入につなげることは、まったく別の話です。</p>
+    <p>実際にやってみると、こういうところで迷う人がほとんどです。</p>
+    <ul class="fail-list">
+      <li>どんなテーマなら、実際に手に取ってもらえるのか</li>
+      <li>1セット出して終わりにせず、2セット目・3セット目をどう続けるか</li>
+      <li>スタンプ単体の売上だけで、本当に生活を変えられるのか</li>
+    </ul>
+    <p>僕自身、うまくいったことより失敗のほうがずっと多いです。よく分かっていない投資に大金を溶かしたこともあります。<strong>「調べたつもり」で、実は「分かった気になっていただけ」</strong>でした。</p>
+    <p>そこから試行錯誤して、ようやく見つけたのが、ちゃんと積み上がっていく再現性のあるやり方でした。ここまで読んでくれたあなたには、同じだけ遠回りしてほしくありません。</p>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="wrap">
+    <h2>スタンプ作りの、その先の話</h2>
+    <p>AIを使って稼ぎたい、もっと詳しく知りたい人は、僕が直接相談に乗ります。0円でLINE無料コンサルもしているので、興味があれば下のnoteを読んでご相談ください。</p>
+    <a class="cta-btn" href="https://note.com/preview/n2712e8883db6?prev_access_key=dff9f58d58ec803e01e11595afa3bde5" target="_blank" rel="noopener">無料noteを読む</a>
+    <p class="cta-note">合わなければ、それだけで大丈夫です。無理に何かを続ける必要はありません。</p>
+  </div>
+</section>
+
+<footer>スマホ1台で作るLINEスタンプガイド</footer>
+
+<script>
+function copyPrompt(id, btn){
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const old = btn.textContent;
+    btn.textContent = "コピーしました";
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent = old; btn.classList.remove('copied'); }, 1800);
+  });
+}
+</script>
+
+</body>
+</html>
