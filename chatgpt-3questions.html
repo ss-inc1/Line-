@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="ChatGPTへの聞き方を変えるだけで、AIがあなた専属のコンサルタントになる3つの質問。">
+<title>ChatGPTへの3つの質問｜AIがあなた専属のコンサルタントになる聞き方</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mint:#eaf6ef; --mint-deep:#cdece0; --ink:#26333a; --ink-soft:#5b6b70;
+    --coral:#ff7b68; --coral-deep:#e8583f; --yellow:#ffd873; --paper:#fffdf9;
+    --line:#c9e3d6; --radius:22px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--mint);color:var(--ink);font-family:"Noto Sans JP",sans-serif;line-height:1.85;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.disp{font-family:"Zen Maru Gothic",sans-serif;font-weight:900;line-height:1.45;letter-spacing:.01em;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 22px;}
+  section{padding:60px 0;}
+
+  .hero{
+    position:relative;padding:56px 0 44px;overflow:hidden;
+    background:
+      radial-gradient(circle at 85% 8%, var(--yellow) 0, transparent 42%),
+      radial-gradient(circle at 8% 85%, var(--coral) 0, transparent 38%),
+      var(--mint);
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .kicker{display:inline-block;background:var(--paper);border:2px solid var(--ink);border-radius:999px;padding:6px 18px;font-size:14px;font-weight:700;margin-bottom:22px;box-shadow:3px 3px 0 var(--ink);}
+  .hero h1{font-size:clamp(28px,7vw,40px);margin:0 0 20px;}
+  .hero h1 em{font-style:normal;color:var(--coral-deep);text-decoration:underline wavy var(--yellow) 4px;text-underline-offset:6px;}
+  .hero p.lead{font-size:17px;color:var(--ink-soft);max-width:34em;}
+
+  .chat-mock{margin-top:32px;background:var(--paper);border:2px solid var(--ink);border-radius:20px;padding:18px;box-shadow:5px 5px 0 var(--ink);}
+  .bubble{border-radius:16px;padding:12px 16px;font-size:14.5px;margin-bottom:10px;max-width:88%;}
+  .bubble.user{background:var(--ink);color:#fff;margin-left:auto;border-bottom-right-radius:4px;}
+  .bubble.ai{background:var(--mint);color:var(--ink);border-bottom-left-radius:4px;}
+  .bubble.ng{background:#ffe3df;color:var(--coral-deep);font-weight:700;}
+
+  .pain-list{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:12px;}
+  .pain-list li{background:var(--paper);border:2px solid var(--ink);border-radius:16px;padding:14px 18px;font-weight:500;box-shadow:4px 4px 0 var(--mint-deep);}
+  .reassure{margin-top:26px;font-size:19px;font-weight:700;background:var(--ink);color:var(--paper);display:inline-block;padding:12px 22px;border-radius:14px;}
+
+  .why-now{background:var(--paper);}
+
+  .step{background:var(--paper);border-radius:var(--radius);padding:26px 22px 22px;margin-top:26px;border:2px solid var(--line);}
+  .step-badge{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--coral);color:#fff;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:18px;margin-bottom:12px;}
+  .step h3{font-size:20px;margin:0 0 6px;}
+  .step .goal{color:var(--ink-soft);font-size:14.5px;margin-bottom:14px;}
+  .step .goal b{color:var(--ink);}
+  .tip{background:#fff6e2;border-left:4px solid var(--yellow);padding:12px 16px;border-radius:0 12px 12px 0;font-size:14.5px;margin-top:14px;}
+
+  .prompt-box{position:relative;background:#1f2b30;color:#eaf3ee;border-radius:14px;padding:20px 18px 18px;margin-top:14px;font-size:14.5px;line-height:1.9;white-space:pre-wrap;font-family:"SFMono-Regular",Consolas,monospace;}
+  .prompt-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .prompt-label span{font-family:"Noto Sans JP",sans-serif;font-weight:700;font-size:13px;color:var(--ink-soft);}
+  .copy-btn{font-family:"Noto Sans JP",sans-serif;font-weight:700;font-size:13px;background:var(--coral);color:#fff;border:none;border-radius:999px;padding:7px 16px;cursor:pointer;}
+  .copy-btn.copied{background:#3fa373;}
+
+  .idea-card{background:var(--paper);border:2px solid var(--ink);border-radius:16px;padding:16px 18px;margin-top:14px;box-shadow:4px 4px 0 var(--mint-deep);}
+  .idea-card h4{margin:0 0 6px;font-family:"Zen Maru Gothic",sans-serif;font-size:16px;}
+
+  details{background:var(--paper);border-radius:14px;padding:14px 18px;margin-top:10px;border:1px solid var(--line);}
+  summary{font-weight:700;cursor:pointer;list-style:none;}
+  summary::-webkit-details-marker{display:none;}
+  summary:before{content:"Q. ";color:var(--coral-deep);}
+  details p{margin:10px 0 2px;color:var(--ink-soft);}
+
+  .turn{background:var(--ink);color:#f2ede4;}
+  .turn h2{color:#fff;}
+  .turn .fail-list{list-style:none;padding:0;margin:20px 0;}
+  .turn .fail-list li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.15);color:#d9d3c6;}
+  .turn strong{color:var(--yellow);}
+  .turn .hook{font-size:19px;font-weight:700;margin-top:22px;color:#fff;}
+
+  .cta-final{background:linear-gradient(160deg,var(--mint-deep),var(--mint));text-align:center;}
+  .cta-final h2{font-size:26px;}
+  .cta-final .teaser{list-style:none;padding:0;margin:22px 0;text-align:left;display:grid;gap:10px;}
+  .cta-final .teaser li{background:var(--paper);border:2px solid var(--ink);border-radius:14px;padding:12px 16px;font-size:14.5px;box-shadow:3px 3px 0 var(--mint-deep);}
+  .cta-btn{display:inline-block;margin-top:16px;background:var(--coral-deep);color:#fff;font-family:"Zen Maru Gothic",sans-serif;font-weight:900;font-size:20px;padding:20px 44px;border-radius:999px;text-decoration:none;box-shadow:0 10px 0 #a83f2c;}
+  .cta-btn:active{transform:translateY(6px);box-shadow:0 4px 0 #a83f2c;}
+  .cta-note{font-size:13px;color:var(--ink-soft);margin-top:16px;}
+
+  footer{text-align:center;font-size:13px;color:var(--ink-soft);padding:30px 0 50px;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">聞き方を変えるだけ・3つの質問だけ</span>
+    <h1>ChatGPTを、<br><em>あなた専属のコンサル</em>に変える聞き方。</h1>
+    <p class="lead">「短期間で稼ぐ方法を教えて」。こう聞いて終わっていませんか。実はその聞き方、AIにまともに相手にされていません。ここでは、たった3つの質問を順番に送るだけで、AIがあなた専属の実行プランを作ってくれる方法をそのまま渡します。</p>
+
+    <div class="chat-mock">
+      <div class="bubble user">短期間で簡単に稼げる方法を教えて</div>
+      <div class="bubble ng">✕ こういう聞き方だと、当たり障りのない一般論しか返ってきません</div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>心当たり、ありませんか</h2>
+    <ul class="pain-list">
+      <li>ChatGPTに聞いても、当たり障りのない一般論しか返ってこない</li>
+      <li>「結局、自分は何をすればいいのか」が最後まで分からない</li>
+      <li>情報が多すぎて、逆に行動できなくなる</li>
+    </ul>
+    <div class="reassure">原因は、AIではなく「聞き方」でした。</div>
+  </div>
+</section>
+
+<section class="why-now">
+  <div class="wrap">
+    <h2>なぜ、聞き方だけでここまで変わるのか</h2>
+    <p>AIは、質問が抽象的なほど、答えも抽象的になります。「稼ぐ方法を教えて」は、世界中の誰にでも当てはまる答えしか引き出せない質問です。</p>
+    <p><b>ここで紹介する3つの質問は、それぞれ役割が分かれています。</b></p>
+    <div class="idea-card">
+      <h4>① あなた専用に絞り込ませる</h4>
+      <p style="margin:0;color:var(--ink-soft);">これまでの会話データを使わせ、選択肢を1つに絞らせることで、一般論ではなく「あなたに向けた1つの答え」に強制的に変えます。</p>
+    </div>
+    <div class="idea-card">
+      <h4>② お手本を1人に固定させる</h4>
+      <p style="margin:0;color:var(--ink-soft);">「誰かのようになる」という指示は、AIの出力を一気に具体化させます。抽象的な助言が、その人物のスキル・考え方に基づいた助言に変わります。</p>
+    </div>
+    <div class="idea-card">
+      <h4>③ 本人になりきらせて、行動計画に落とす</h4>
+      <p style="margin:0;color:var(--ink-soft);">「その人になりきって」と指示することで、AIは知識ではなく、その人物の意思決定の仕方まで再現しようとします。最後に期間と実践レベルを指定すれば、机上の空論では終わりません。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 style="margin-bottom:4px;">3つの質問を、そのまま渡します</h2>
+    <p style="color:var(--ink-soft);">上から順番に、1つずつ送ってください。前の回答を踏まえて、AIがどんどん具体的になっていきます。</p>
+
+    <div class="step">
+      <span class="step-badge">1</span>
+      <h3>選択肢を1つに絞らせる</h3>
+      <p class="goal"><b>目的：</b>一般論ではなく、あなた専用の答えに強制的に絞り込むためです。</p>
+      <div class="prompt-box" id="prompt1">
+<div class="prompt-label"><span>コピペ用プロンプト</span><button class="copy-btn" onclick="copyPrompt('prompt1raw', this)">コピー</button></div>
+<span id="prompt1raw">私に関してあなたが把握しているデータをフル活用して、私が目指す収入を最速で実現する具体的なルートを提示してください。選択肢は1つに絞って回答をお願いします。</span>
+      </div>
+      <div class="tip">これまでの会話が少ないほど、AIの答えも浅くなります。普段からある程度会話しているアカウントで試すのがおすすめです。</div>
+      <div class="chat-mock" style="margin-top:16px;">
+        <div class="bubble ai">あなたはこれまでの会話から、AIの活用と発信に強い関心があると分かっています。数ある選択肢の中で、最速で結果に近づけるルートは「SNS発信×AIコンテンツ販売」です。他の選択肢は今回は提示しません。</div>
+      </div>
+      <div class="cap">実際にはこのように、理由つきで1つに絞った答えが返ってきます（内容は一例です）</div>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">2</span>
+      <h3>お手本にすべき人物を1人に固定させる</h3>
+      <p class="goal"><b>目的：</b>抽象的な助言を、実在するスキルセットに基づいた助言に変えるためです。</p>
+      <div class="prompt-box" id="prompt2">
+<div class="prompt-label"><span>コピペ用プロンプト</span><button class="copy-btn" onclick="copyPrompt('prompt2raw', this)">コピー</button></div>
+<span id="prompt2raw">この計画を進める上で、私がお手本にすべき最適な人物を1人だけ挙げてください。その人物のどのスキルを学ぶべきかも簡潔に教えてください。</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">3</span>
+      <h3>本人になりきらせて、90日計画に落とす</h3>
+      <p class="goal"><b>目的：</b>知識の羅列で終わらせず、明日から動ける実行計画に変換するためです。</p>
+      <div class="prompt-box" id="prompt3">
+<div class="prompt-label"><span>コピペ用プロンプト</span><button class="copy-btn" onclick="copyPrompt('prompt3raw', this)">コピー</button></div>
+<span id="prompt3raw">あなたはいまからその本人になりきって回答をしてください。机上の空論はなし、明日から取り組める実践的なステップにおとし込んで、90日間の具体的な行動計画をつくってください。</span>
+      </div>
+      <div class="tip">出てきた計画が抽象的だと感じたら、「1週目の月曜日、具体的に何をすればいい？」のように、さらに1段階細かく聞き返すと、驚くほど具体的になります。</div>
+    </div>
+
+    <div class="step">
+      <span class="step-badge">+</span>
+      <h3>詰まったときに使う、追加の2つの質問</h3>
+      <p class="goal"><b>目的：</b>3つの質問だけで終わらせず、計画倒れを防ぐためです。</p>
+      <p>90日計画をもらった後、多くの人はここで満足して終わってしまいます。ですが、本当に大事なのはここからです。</p>
+      <div class="prompt-box" id="prompt4">
+<div class="prompt-label"><span>① 最初の一歩を具体化する</span><button class="copy-btn" onclick="copyPrompt('prompt4raw', this)">コピー</button></div>
+<span id="prompt4raw">この計画の1週目、月曜日の朝に、具体的に何をすればいいですか。作業時間、使うツール、完了の目安まで教えてください。</span>
+      </div>
+      <div class="prompt-box" id="prompt5">
+<div class="prompt-label"><span>② 2週間後、成果が出ないときの軌道修正</span><button class="copy-btn" onclick="copyPrompt('prompt5raw', this)">コピー</button></div>
+<span id="prompt5raw">計画通りに2週間動きましたが、思うような反応がありません。今の状況を踏まえて、計画のどこを見直すべきか、具体的に指摘してください。</span>
+      </div>
+      <div class="tip">②のプロンプトを送るときは、実際にやったことと数字（投稿数、反応数など）を一緒に伝えると、精度がぐっと上がります。</div>
+    </div>
+  </div>
+</section>
+
+<section class="why-now">
+  <div class="wrap">
+    <h2>使うときに気をつけたいこと</h2>
+    <div class="idea-card">
+      <h4>出てきた「お手本」を鵜呑みにしない</h4>
+      <p style="margin:0;color:var(--ink-soft);">AIが挙げる人物は、あくまで参考の1人です。実在の人物のやり方をそのまま真似るのではなく、「考え方」や「優先順位のつけ方」を参考にする、という距離感が安全です。</p>
+    </div>
+    <div class="idea-card">
+      <h4>90日計画は「仮説」として扱う</h4>
+      <p style="margin:0;color:var(--ink-soft);">AIが作る計画は、あくまで今持っている情報からの仮説です。1〜2週間動いてみて、想定と違えば計画ごと聞き直せばいいので、完璧を求めすぎないことがコツです。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>気になるところ</h2>
+    <details>
+      <summary>ChatGPTの無料プランでも使えますか？</summary>
+      <p>使えます。ただし「私に関してあなたが把握しているデータ」の精度は、普段の会話量やメモリー機能の設定に左右されます。</p>
+    </details>
+    <details>
+      <summary>Claudeなど他のAIでも使えますか？</summary>
+      <p>使えます。3つの質問の構造（絞り込む→お手本を固定する→なりきらせて計画化する）はAIの種類を問いません。</p>
+    </details>
+    <details>
+      <summary>1回で満足いく答えが出なかったら？</summary>
+      <p>そのまま「もっと具体的に」「その部分を詳しく」と聞き返して大丈夫です。3つの質問は入り口であって、そこで会話を終わらせる必要はありません。</p>
+    </details>
+    <details>
+      <summary>「お手本」に有名人が出てきたら、そのまま信じていい？</summary>
+      <p>参考程度にとどめるのが安全です。実在の人物の名前が出た場合は、その人の考え方や優先順位の付け方を学ぶ、という距離感にしてください。連絡を取ろうとしたり、無断でやり方を完全コピーするのは避けましょう。</p>
+    </details>
+    <details>
+      <summary>毎日AIに聞き直したほうがいい？</summary>
+      <p>毎日である必要はありません。1週間に1回、進捗と数字を伝えて計画を微調整してもらうくらいのペースで十分です。むしろ聞きすぎると、計画がブレやすくなります。</p>
+    </details>
+  </div>
+</section>
+
+<section class="turn">
+  <div class="wrap">
+    <h2>3つの質問は、ここまでで全部渡しました。ただ、厳しいことを言います</h2>
+    <p>AIから具体的な計画を引き出せることと、それを使って安定して収入につなげることは、まったく別の話です。</p>
+    <p>終わったあとに、こういうことで迷います。</p>
+    <ul class="fail-list">
+      <li>AIが作った90日計画を、実際に90日間続けられるか</li>
+      <li>提示された「お手本」の方向性が、本当に自分に合っているのか</li>
+      <li>計画通りに動いても成果が出ないとき、どう軌道修正すればいいのか</li>
+    </ul>
+    <p>ここで止まる人が、ほとんどです。</p>
+    <p><strong>偉そうに書いていますが、僕は失敗の方がずっと多いです。</strong></p>
+    <p>AIに同じような質問を何度もぶつけては、もっともらしい計画を手に入れて満足し、結局3日で止まる。それを何度も繰り返しました。</p>
+    <p>調べたつもりで、<strong>分かった気になっていただけ</strong>。結果には、結びついていませんでした。</p>
+    <p>そこから必死に試行錯誤して、ようやく見つけたのが、再現しやすい形だったんです。</p>
+    <p class="hook">でも、ここまで読んでくれたあなたは、こんな遠回りしなくていい。</p>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="wrap">
+    <h2>僕なりの正解を、ここに全部まとめました</h2>
+    <ul class="teaser">
+      <li>19歳、大学生が、AIも使いながらSNSだけで月100万円稼げるようになった、その具体的な中身</li>
+      <li>500万円以上を溶かして分かった、「9割が詐欺で、1割だけが本物」という副業の見分け方</li>
+      <li>AIが作った計画を、途中で挫折せずに実行し続けるための、たった1つの工夫</li>
+    </ul>
+    <p>何から始めるか、どのAIをどう使うか、SNSでどう収益にするか。この3つの質問にかぎらない、AIマネタイズの全体像を無料のnoteに書いています。</p>
+    <a class="cta-btn" href="https://note.com/preview/n2712e8883db6?prev_access_key=dff9f58d58ec803e01e11595afa3bde5" target="_blank" rel="noopener">＼ タップして ／<br>無料noteで受け取る</a>
+    <p class="cta-note">期間限定で、個別の無料相談もしています。もっと具体的に、直接相談したい人にはおすすめです。</p>
+    <p class="cta-note">受け取りは無料です。合わなければ、それだけで大丈夫です。</p>
+  </div>
+</section>
+
+<footer>ChatGPTへの3つの質問ガイド</footer>
+
+<script>
+function copyPrompt(id, btn){
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const old = btn.textContent;
+    btn.textContent = "コピーしました";
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent = old; btn.classList.remove('copied'); }, 1800);
+  });
+}
+</script>
+
+</body>
+</html>
