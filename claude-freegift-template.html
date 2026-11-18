@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f6f1">
+  <meta name="description" content="Instagramリールで案内された番号の無料資料を選んで読めるページです。">
+  <title>リールで紹介した無料資料はこちら</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=Zen+Old+Mincho:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #153c33;
+      --forest-2: #245c4d;
+      --mint: #dcebe2;
+      --mint-2: #edf4ee;
+      --gold: #dbb766;
+      --cream: #faf9f4;
+      --paper: #fffefa;
+      --ink: #182a25;
+      --muted: #64736c;
+      --line: #dce4dc;
+      --shadow: 0 18px 48px rgba(23, 57, 47, .09);
+      --sans: "Noto Sans JP", sans-serif;
+      --serif: "Zen Old Mincho", serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .shell { width: min(100% - 32px, 820px); margin: 0 auto; }
+    .masthead { display:flex; justify-content:space-between; align-items:center; padding:18px 2px; color:var(--muted); font:700 11px "DM Sans",sans-serif; letter-spacing:.12em; }
+    .brand { display:flex; align-items:center; gap:9px; color:var(--forest); }
+    .brand-mark { width:25px; height:25px; display:grid; place-items:center; border-radius:8px; color:#fff; background:var(--forest); font-size:13px; letter-spacing:0; }
+    .masthead-tag { border:1px solid var(--line); border-radius:999px; padding:5px 10px; letter-spacing:.08em; }
+    .hero { position:relative; overflow:hidden; padding:clamp(28px,7vw,64px); border-radius:26px; color:#fff; background:radial-gradient(circle at 92% 12%, rgba(219,183,102,.28), transparent 27%), linear-gradient(135deg, #173e34, #24594a); box-shadow:var(--shadow); }
+    .hero:after { content:""; position:absolute; width:220px; height:220px; right:-86px; bottom:-112px; border:1px solid rgba(255,255,255,.16); border-radius:50%; box-shadow:0 0 0 24px rgba(255,255,255,.035),0 0 0 50px rgba(255,255,255,.025); }
+    .hero-inner { position:relative; z-index:1; max-width:620px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:8px; color:#f2d795; font:800 10px "DM Sans",sans-serif; letter-spacing:.16em; }
+    .eyebrow:before { content:""; width:20px; height:1px; background:currentColor; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { margin:15px 0 14px; font:700 clamp(29px,6.8vw,45px)/1.46 var(--serif); letter-spacing:.015em; }
+    .hero-lead { max-width:590px; margin:0; color:rgba(255,255,255,.82); font-size:15px; }
+    .instruction { display:flex; gap:12px; align-items:flex-start; margin-top:24px; padding:13px 15px; border:1px solid rgba(255,255,255,.18); border-radius:14px; background:rgba(255,255,255,.08); font-size:13px; }
+    .instruction b { color:#f2d795; white-space:nowrap; }
+    .instruction p { margin:0; }
+    main { padding:38px 0 54px; }
+    .section-head { margin-bottom:20px; }
+    .section-kicker { display:block; margin-bottom:5px; color:var(--forest-2); font:800 10px "DM Sans",sans-serif; letter-spacing:.16em; }
+    .section-head h2 { margin:0; color:var(--forest); font:700 clamp(23px,5vw,31px)/1.5 var(--serif); }
+    .section-head p { margin:8px 0 0; color:var(--muted); font-size:14px; }
+    .gift-grid { display:grid; gap:12px; }
+    .gift-card { display:grid; grid-template-columns:66px 1fr auto; align-items:center; gap:16px; padding:18px; border:1px solid var(--line); border-radius:18px; background:var(--paper); box-shadow:0 5px 18px rgba(24,42,37,.035); transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease; }
+    .gift-card:hover { transform:translateY(-2px); border-color:#b9cdbf; box-shadow:0 12px 28px rgba(24,42,37,.08); }
+    .gift-number { display:grid; place-items:center; width:58px; height:58px; border-radius:16px; background:var(--mint-2); color:var(--forest); font:800 21px "DM Sans",sans-serif; letter-spacing:-.04em; }
+    .gift-title { margin:0 0 4px; color:var(--forest); font-size:16px; font-weight:800; line-height:1.55; }
+    .gift-summary { margin:0; color:var(--muted); font-size:13px; line-height:1.7; }
+    .gift-button { display:inline-flex; justify-content:center; align-items:center; gap:9px; min-height:46px; padding:10px 15px; border:1px solid var(--forest); border-radius:12px; background:var(--forest); color:#fff; text-decoration:none; text-align:center; font-size:13px; font-weight:700; white-space:nowrap; transition:background .18s ease,transform .18s ease; }
+    .gift-button:hover { background:var(--forest-2); transform:translateY(-1px); }
+    .gift-button:after { content:"↗"; color:#e8cb83; font-size:15px; }
+    .note-strip { display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center; margin:24px 0 0; padding:22px; border:1px solid #e4d6b5; border-radius:18px; background:linear-gradient(110deg,#fffdf7,#f7f1e3); }
+    .note-strip .note-label { display:block; margin-bottom:5px; color:#94752f; font:800 10px "DM Sans",sans-serif; letter-spacing:.14em; }
+    .note-strip h3 { margin:0 0 5px; color:var(--forest); font:700 19px/1.5 var(--serif); }
+    .note-strip p { margin:0; color:var(--muted); font-size:13px; }
+    .note-button { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:48px; padding:11px 16px; border-radius:12px; color:#fff; background:#9b6e1f; text-decoration:none; font-size:13px; font-weight:800; text-align:center; box-shadow:0 6px 16px rgba(128,91,30,.18); transition:background .18s ease,transform .18s ease; }
+    .note-button:hover { background:#805918; transform:translateY(-1px); }
+    .note-button:after { content:"↗"; color:#f4dfa9; }
+    .note-footnote { margin:9px 2px 0; color:#7b817b; font-size:11px; }
+    .details-section { margin-top:54px; }
+    .detail-list { display:grid; gap:22px; }
+    .detail-card { scroll-margin-top:18px; overflow:hidden; border:1px solid var(--line); border-radius:20px; background:var(--paper); box-shadow:0 8px 28px rgba(24,42,37,.045); }
+    .detail-top { display:flex; align-items:center; gap:13px; padding:20px 22px 16px; border-bottom:1px solid var(--line); background:linear-gradient(100deg,#eff5ef,#fbfaf5); }
+    .detail-top .gift-number { flex:0 0 48px; width:48px; height:48px; border-radius:14px; font-size:17px; }
+    .detail-top h3 { margin:0; color:var(--forest); font:700 19px/1.5 var(--serif); }
+    .detail-body { padding:22px; }
+    .detail-body p { margin:0; color:#485850; font-size:14px; }
+    .detail-body .placeholder { padding:17px; border:1px dashed #bfcec1; border-radius:13px; color:#66736b; background:#f7f9f5; }
+    .detail-body .placeholder strong { display:block; margin-bottom:4px; color:var(--forest); font-size:13px; }
+    .detail-note { margin:0 22px 22px; padding:18px; border-radius:15px; background:#f8f3e7; }
+    .detail-note .note-label { display:block; margin-bottom:4px; color:#94752f; font:800 9px "DM Sans",sans-serif; letter-spacing:.15em; }
+    .detail-note h4 { margin:0 0 5px; color:var(--forest); font:700 17px/1.5 var(--serif); }
+    .detail-note p { margin:0 0 12px; color:var(--muted); font-size:12px; }
+    .detail-note .note-button { min-height:42px; padding:9px 13px; font-size:12px; }
+    .empty-note { margin-top:26px; }
+    .back-link { display:inline-flex; align-items:center; gap:7px; margin:0 0 18px; color:var(--forest-2); font-size:13px; font-weight:700; text-decoration:none; }
+    .back-link:hover { text-decoration:underline; }
+    .footer { padding:24px 0 38px; border-top:1px solid var(--line); color:var(--muted); font:700 9px "DM Sans",sans-serif; letter-spacing:.14em; text-align:center; }
+    .is-hidden { display:none !important; }
+    a:focus-visible { outline:3px solid #d7b45f; outline-offset:3px; }
+    @media(max-width:620px) {
+      .shell { width:min(100% - 24px, 520px); }
+      .masthead { padding:14px 1px; }
+      .hero { border-radius:21px; padding:28px 22px 25px; }
+      .hero-lead { font-size:14px; }
+      .instruction { gap:8px; padding:12px; font-size:12px; }
+      main { padding-top:30px; }
+      .gift-card { grid-template-columns:52px 1fr; gap:12px; padding:14px; }
+      .gift-number { width:48px; height:48px; border-radius:14px; font-size:18px; }
+      .gift-title { font-size:15px; }
+      .gift-summary { font-size:12px; }
+      .gift-button { grid-column:1/-1; width:100%; min-height:48px; }
+      .note-strip { grid-template-columns:1fr; gap:15px; padding:18px; }
+      .note-strip h3 { font-size:18px; }
+      .note-button { width:100%; }
+      .details-section { margin-top:43px; }
+      .detail-top { padding:16px; }
+      .detail-body { padding:17px; }
+      .detail-note { margin:0 16px 16px; padding:15px; }
+      .detail-note .note-button { width:100%; }
+    }
+    @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*:before,*:after{transition:none!important} }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">G</span><span>FREE GIFT LIBRARY</span></div>
+      <span class="masthead-tag">INSTAGRAM RESOURCE</span>
+    </header>
+
+    <section class="hero" id="hero">
+      <div class="hero-inner">
+        <span class="eyebrow">FREE MATERIALS</span>
+        <h1 id="hero-title">リールで紹介した<br>無料資料はこちら</h1>
+        <p class="hero-lead">動画で案内された番号の資料を選んでください。AIの使い方や活用方法を、無料で確認できます。</p>
+        <div class="instruction">
+          <b>資料の選び方</b>
+          <p>リールで「01」と案内された方は、01の資料を開いてください。コメント欄やキャプションにURLを探しに行く必要はありません。</p>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section id="library" aria-labelledby="library-title">
+        <div class="section-head">
+          <span class="section-kicker">CHOOSE A NUMBER</span>
+          <h2 id="library-title">無料資料一覧</h2>
+          <p>リールで見た番号と同じ資料をタップしてください。</p>
+        </div>
+        <div class="gift-grid" id="gift-grid" aria-live="polite"></div>
+
+        <aside class="note-strip" aria-label="副業noteの案内">
+          <div>
+            <span class="note-label">NEXT READING · FREE NOTE</span>
+            <h3>AIの活用を、副業の取り組み方まで考えたい方へ</h3>
+            <p>副業で試したことや失敗を経て、収入につながるまでの経験をまとめた無料noteです。</p>
+          </div>
+          <a class="note-button" data-note-cta href="#note" target="_blank" rel="noopener">副業に取り組む流れをnoteで読む</a>
+        </aside>
+        <p class="note-footnote">noteでは本人の経験を読めます。個別資料の操作手順をnoteの内容として案内するものではありません。</p>
+      </section>
+
+      <section class="details-section" id="gift-details" aria-labelledby="details-title">
+        <div class="section-head">
+          <span class="section-kicker">OPEN YOUR MATERIAL</span>
+          <h2 id="details-title">資料を読む</h2>
+          <p>各資料の本文を読んだあと、関連する副業noteも確認できます。</p>
+        </div>
+        <div class="detail-list" id="detail-list"></div>
+      </section>
+
+      <aside class="note-strip empty-note" aria-label="副業noteを読む">
+        <div>
+          <span class="note-label">WANT TO GO FURTHER?</span>
+          <h3>資料を読んだあと、副業としてどう活かすかを考える</h3>
+          <p>副業を試す中での失敗や、収入につながるまでに経験したことを無料noteにまとめています。</p>
+        </div>
+        <a class="note-button" data-note-cta href="#note" target="_blank" rel="noopener">副業の経験と取り組み方を無料noteで読む</a>
+      </aside>
+    </main>
+
+    <footer class="footer">FREE MATERIALS · PRACTICAL LEARNING</footer>
+  </div>
+
+  <script>
+    // noteの遷移先はここだけ変更すれば、ページ内すべてのnote CTAに反映されます。
+    const NOTE_URL = "https://note.com/preview/n7bb77d86e981?prev_access_key=3d35686e5fad504070877166a381face";
+
+    // 資料を増やすときは、この配列に1件追加します。
+    // title / summary / bodyHtml / noteTitle / noteText を編集し、公開できる資料URLを url に設定してください。
+    // 空の url は本文内に未設定表示を出します。架空の外部リンクへは飛ばしません。
+    const GIFTS = [
+      {
+        number: "01",
+        title: "01の資料タイトルを設定",
+        summary: "この資料で分かることを、読者が一目で分かる短い説明に置き換えます。",
+        url: "",
+        bodyHtml: '<div class="placeholder"><strong>01の資料本文をここに追加</strong>操作手順、画面例、注意点など、この番号のリールで約束した内容を記載してください。</div>',
+        noteTitle: "このテーマを副業に活かす方法も知りたい方へ",
+        noteText: "資料の使い方を確認したあと、副業に取り組む中での経験や考え方をまとめたnoteを読めます。"
+      },
+      {
+        number: "02",
+        title: "02の資料タイトルを設定",
+        summary: "内容の要点や、読んだあとにできることを1〜2文で紹介します。",
+        url: "",
+        bodyHtml: '<div class="placeholder"><strong>02の資料本文をここに追加</strong>この枠に資料の内容を追加すると、一覧から開けるようになります。</div>',
+        noteTitle: "AIの使い方から、次の副業の一歩を考えたい方へ",
+        noteText: "副業を試した経験や、収入につながるまでの経緯を綴った無料noteを案内します。"
+      },
+      {
+        number: "03",
+        title: "03の資料タイトルを設定",
+        summary: "リール内の案内と同じ言葉を使うと、探している資料を見つけやすくなります。",
+        url: "",
+        bodyHtml: '<div class="placeholder"><strong>03の資料本文をここに追加</strong>別ファイルで配布する場合は、下の「url」に実在する公開URLを設定してください。</div>',
+        noteTitle: "学んだ内容を、収入につなげる過程も知りたい方へ",
+        noteText: "無料noteでは、副業での試行錯誤と収入につながるまでの経験を読めます。"
+      },
+      {
+        number: "04",
+        title: "04の資料タイトルを設定",
+        summary: "資料の対象者や、扱うテーマが伝わる説明を追加してください。",
+        url: "",
+        bodyHtml: '<div class="placeholder"><strong>04の資料本文をここに追加</strong>資料の文章・図解・画像をここへ追加してください。画像はこのHTML内に埋め込めます。</div>',
+        noteTitle: "副業の選び方や取り組み方を考えたい方へ",
+        noteText: "資料の次に知りたい方へ、副業に挑戦してきた本人の経験をまとめたnoteを紹介します。"
+      }
+    ];
+
+    const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[char]));
+
+    function renderGiftList() {
+      const grid = document.getElementById("gift-grid");
+      grid.innerHTML = GIFTS.map((gift) => {
+        const destination = `?gift=${encodeURIComponent(gift.number)}`;
+        const label = "資料を見る";
+        return `<article class="gift-card">
+          <span class="gift-number" aria-label="資料番号 ${escapeHtml(gift.number)}">${escapeHtml(gift.number)}</span>
+          <div><h3 class="gift-title">${escapeHtml(gift.title)}</h3><p class="gift-summary">${escapeHtml(gift.summary)}</p></div>
+          <a class="gift-button" href="${destination}" ${gift.url ? 'target="_blank" rel="noopener"' : ''}>${label}</a>
+        </article>`;
+      }).join("");
+    }
+
+    function renderGiftDetails() {
+      const list = document.getElementById("detail-list");
+      list.innerHTML = GIFTS.map((gift) => {
+        const content = gift.url
+          ? `<p>資料を別ページで公開しています。<a href="${escapeHtml(gift.url)}" target="_blank" rel="noopener">${escapeHtml(gift.title)}を開く</a></p>`
+          : gift.bodyHtml;
+        return `<article class="detail-card" id="gift-${escapeHtml(gift.number)}">
+          <header class="detail-top"><span class="gift-number">${escapeHtml(gift.number)}</span><h3>${escapeHtml(gift.title)}</h3></header>
+          <div class="detail-body">${content}</div>
+          <aside class="detail-note">
+            <span class="note-label">RELATED FREE NOTE</span>
+            <h4>${escapeHtml(gift.noteTitle)}</h4>
+            <p>${escapeHtml(gift.noteText)}</p>
+            <a class="note-button" data-note-cta href="#note" target="_blank" rel="noopener">副業への活かし方を無料noteで読む</a>
+          </aside>
+        </article>`;
+      }).join("");
+    }
+
+    function applyNoteUrl() {
+      document.querySelectorAll("[data-note-cta]").forEach((link) => { link.href = NOTE_URL; });
+    }
+
+    function openSelectedGift() {
+      const selected = new URLSearchParams(location.search).get("gift");
+      if (!selected) return;
+      const gift = GIFTS.find((item) => item.number === selected);
+      if (!gift) return;
+      document.getElementById("hero-title").textContent = `無料資料 ${gift.number}`;
+      document.querySelector(".hero-lead").textContent = `${gift.title}を読むページです。資料の内容を確認したあと、必要に応じて副業noteもご覧ください。`;
+      document.querySelector(".instruction").classList.add("is-hidden");
+      document.getElementById("library").classList.add("is-hidden");
+      const details = document.getElementById("gift-details");
+      details.querySelector(".section-head").classList.add("is-hidden");
+      document.querySelectorAll(".detail-card").forEach((card) => {
+        if (card.id !== `gift-${selected}`) card.classList.add("is-hidden");
+      });
+      document.querySelector(".empty-note").classList.add("is-hidden");
+      const back = document.createElement("a");
+      back.className = "back-link";
+      back.href = location.pathname;
+      back.textContent = "← 資料一覧に戻る";
+      details.prepend(back);
+      document.title = `${gift.number} ${gift.title}｜無料資料`;
+    }
+
+    renderGiftList();
+    renderGiftDetails();
+    applyNoteUrl();
+    openSelectedGift();
+  </script>
+</body>
+</html>
