@@ -147,7 +147,20 @@
       .skill-grid,.image-grid { grid-template-columns:1fr; }
     }
     @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*:before,*:after{transition:none!important} }
-  </style>
+</style>
+<style>
+.hero-affiliate{display:flex;width:fit-content;max-width:100%;padding:14px 18px;font-size:15px;line-height:1.7}
+.note-strip{grid-template-columns:1fr;padding:27px;border:2px solid #d7bf89;background:linear-gradient(120deg,#fff7e4,#f3e3bd)}
+.note-strip h3{font-size:clamp(23px,4vw,30px);line-height:1.48}
+.note-strip p{font-size:15px;line-height:1.85}
+.note-strip .note-button{width:100%;min-height:66px;font-size:17px}
+.detail-note{padding:28px;border:2px solid #d7bf89;background:linear-gradient(125deg,#fff8e8,#f0dfb6)}
+.detail-note h4{font-size:clamp(23px,4vw,30px);line-height:1.48}
+.detail-note p{font-size:15px;line-height:1.9}
+.detail-note ul{font-size:14px;line-height:1.85}
+.detail-note .note-button{width:100%;min-height:66px;font-size:17px}
+@media(max-width:600px){.hero-affiliate{width:100%;padding:13px 14px;font-size:13px}.note-strip,.detail-note{padding:20px}.note-strip .note-button,.detail-note .note-button{min-height:64px;font-size:15px}}
+</style>
 </head>
 <body>
   <div class="shell">
