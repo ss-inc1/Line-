@@ -457,10 +457,10 @@ Xへの投稿・返信・DMは実行せず、下書きと手順だけを出し�
     });
 
     function openSelectedGift() {
-      const selected = new URLSearchParams(location.search).get("gift");
-      if (!selected) return;
-      const gift = GIFTS.find((item) => item.number === selected);
+      const requested = new URLSearchParams(location.search).get("gift");
+      const gift = GIFTS.find((item) => item.number === requested) || GIFTS[0];
       if (!gift) return;
+      const selected = gift.number;
       document.getElementById("hero-title").textContent = `${gift.number}｜X Agent Skill活用ガイド`;
       document.querySelector(".hero-lead").textContent = "導入・使い分け・X投稿からアフィリエイト導線を作る考え方まで、実践の順にまとめました。";
       document.querySelector(".instruction").classList.add("is-hidden");
